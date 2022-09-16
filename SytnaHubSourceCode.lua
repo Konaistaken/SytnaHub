@@ -2035,8 +2035,26 @@ local MainTab = Window:AddTab("Main Tab")
 local PlayersTab = Window:AddTab("Players Tab")
 local VisualsTab = Window:AddTab("Visuals Tab")
 local TeleportsTab = Window:AddTab("Teleports Tab")
+local ExecutorTab = Window:AddTab("Executor Tab")
 
 do -- Elements
+    --ExecutorTab
+    --Start
+    local Console = ExecutorTab:AddConsole({
+        ["y"] = 100,
+        ["source"] = "Lua",
+    })
+    Console:Set("executor only works on loadstrings just make a loadstring and add your scripts in side it")
+    print(Console:Get())
+
+    local HA = ExecutorTab:AddHorizontalAlignment()
+    HA:AddButton("Execute", function()
+        loadstring(Console:Get())()
+    end)
+    HA:AddButton("Clear", function()
+        Console:Set("")
+    end)
+    --end
 	--MainTab
 	--Start
 	MainTab:AddButton("Coin Farm (RISKY)", function()
