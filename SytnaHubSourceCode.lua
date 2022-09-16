@@ -2031,6 +2031,10 @@ do -- Example UI
 		can_resize = true,
 	})
 
+--Loaders
+_G.on = false
+--End
+    
 local MainTab = Window:AddTab("Main Tab")
 local PlayersTab = Window:AddTab("Players Tab")
 local VisualsTab = Window:AddTab("Visuals Tab")
@@ -2272,8 +2276,102 @@ coroutine.wrap(EQYTJ_fake_script)()
     end)
 
     MainTab:AddButton("Anti-Lag", function()
-
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/MarsQQ/ScriptHubScripts/master/FPS%20Boost"))();
     end)
+
+    MainTab:AddButton("AFK Farm", function ()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/MarsQQ/ScriptHubScripts/master/MM2Autofarm"))();
+    end)
+
+    MainTab:AddButton("Kill All", function ()
+        local Players = game:GetService("Players")	
+			    for i, Victim in pairs(Players:GetPlayers()) do
+			        if Victim.Name ~= game.Players.LocalPlayer.Name then
+			
+			            repeat wait()
+			                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Victim.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)
+			            until
+				                Victim.Character.Humanoid.Health == 0
+				end
+			end
+    end)
+
+    local function GetMurderer()
+        local plrs = game:GetService("Players")
+        for i,v in pairs(plrs:GetPlayers()) do
+            if v.Character:FindFirstChild("Knife") or v.Backpack:FindFirstChild("Knife") then
+                return v
+            end
+        end
+    MainTab:AddButton("Kill Murderer", function ()
+        local Murderer = GetMurderer() --// Gets the userdata of the murderer
+		local pos = Murderer.Character.HumanoidRootPart.Position
+	repeat
+	    if Murderer ~= nil then --// Checking if there actually is a murderer
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Murderer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5)
+				workspace.CurrentCamera.CFrame = Murderer.Character.HumanoidRootPart.CFrame
+				
+			end
+	    wait()
+		until Murderer.Character.Humanoid.Health == 0
+    end)
+
+    MainTab:AddButton("Gun Grabber", function ()
+        local currentX = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X
+			local currentY = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y
+			local currentZ = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z	
+			
+			if workspace:FindFirstChild("GunDrop") ~= nil then
+			
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace:FindFirstChild("GunDrop").CFrame	
+			wait(.25)	
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(currentX, currentY, currentZ)
+				
+			else
+				
+			    game.StarterGui:SetCore("SendNotification", {
+	    Title = "Sytna Hub | MM2";
+	    Text = "Wait for the Sheriff's death to grab the gun";
+	    Icon = "";
+	    Duration = "2";
+	})
+				
+			end	
+    end)
+
+    MainTab:AddLabel("Player Name")
+    local AimBox = MainTab:AddTextBox("Player Name", function(PN)
+        for i,v in pairs(game.Players:GetChildren()) do
+			if (string.sub(string.lower(v.Name),1,string.len(script.Parent.Text))) == string.lower(script.Parent.Text) then
+				script.Parent.Text = v.Name
+			end
+		end
+    end, {
+        ["clear"] = true, -- Default: true (options are optional)
+    })
+
+    MainTab:AddButton("Aim User", function ()
+        _G.on = true
+        local user = AimBox.Text
+        local plr = game.Players.LocalPlayer
+		while _G.on == true do
+			for i,v in pairs(game:GetService("Players"):GetChildren()) do
+				if v.Character:FindFirstChild("HumanoidRootPart") and v.Name == user then
+					repeat
+						local pos = v.Character.HumanoidRootPart.Position
+						workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.Position,pos)
+						wait()
+					until v.Character.Humanoid.Health < 1 or _G.on == false
+				end
+			end
+		end
+    end)
+
+    MainTab:AddButton("Off", function ()
+        _G.on = false
+    end)
+
+end
 
 end
 
