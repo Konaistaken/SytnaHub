@@ -1,4 +1,5 @@
---[[
+if game.PlaceId == 142823291 then
+   --[[
 	ui-engine-v2
 	version 1.3a
 	by Singularity (V3rm @ King Singularity) (Discord @ Singularity#5490)
@@ -2149,6 +2150,114 @@ end
 coroutine.wrap(BFHWAMS_fake_script)()
 
 	end)
+
+    MainTab:AddButton("X-Ray", function()
+        local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextButton = Instance.new("TextButton")
+local TextButton_2 = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.Position = UDim2.new(0.263448268, 0, 0.335341364, 0)
+Frame.Size = UDim2.new(0, 343, 0, 151)
+Frame.Style = Enum.FrameStyle.RobloxRound
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.Position = UDim2.new(0.920858204, 0, -0.0572708771, 0)
+TextButton.Size = UDim2.new(0, 33, 0, 28)
+TextButton.Style = Enum.ButtonStyle.RobloxRoundButton
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "X"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 18.000
+
+TextButton_2.Parent = Frame
+TextButton_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_2.Position = UDim2.new(0.0788431019, 0, 0.415213078, 0)
+TextButton_2.Size = UDim2.new(0, 276, 0, 50)
+TextButton_2.Style = Enum.ButtonStyle.RobloxRoundButton
+TextButton_2.Font = Enum.Font.SourceSans
+TextButton_2.Text = "Enable"
+TextButton_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton_2.TextSize = 23.000
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0.0262534786, 0, 0.0157316104, 0)
+TextLabel.Size = UDim2.new(0, 197, 0, 42)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "X-Ray (UPDATED)"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 25.000
+
+-- Scripts:
+
+local function TVKHBTA_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		script.Parent.Parent.Parent.Frame.Visible = false
+	end)
+end
+coroutine.wrap(TVKHBTA_fake_script)()
+local function NXOPA_fake_script() -- TextButton_2.LocalScript 
+	local script = Instance.new('LocalScript', TextButton_2)
+
+	local obj = game.workspace
+	function XrayOn(obj) --Enables xray
+		for _,v in pairs(obj:GetChildren()) do
+			if (v:IsA("BasePart")) and not v.Parent:FindFirstChild("Humanoid") then
+				v.LocalTransparencyModifier = 0.75
+			end
+			XrayOn(v)
+		end
+	end
+	
+	function XrayOff(obj) --Disables xray
+		for _,v in pairs(obj:GetChildren()) do
+			if (v:IsA("BasePart")) and not v.Parent:FindFirstChild("Humanoid") then
+				v.LocalTransparencyModifier = 0
+			end XrayOff(v)
+		end
+	end
+	
+	local toggle = false
+	
+	script.Parent.MouseButton1Click:Connect(function()	
+		if toggle == false then
+			toggle = true
+			script.Parent.Text = "Disable"
+			XrayOn(obj)
+		else
+			toggle = false
+			script.Parent.Text = "Enable"
+			XrayOff(obj)
+		end
+	end)
+end
+coroutine.wrap(NXOPA_fake_script)()
+local function EQYTJ_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	script.Parent.Active = true
+	script.Parent.Draggable = true
+end
+coroutine.wrap(EQYTJ_fake_script)()
+
+    end)
+
+    MainTab:AddButton("Anti-Lag", function()
+
+    end)
+
+end
 
 end
 
