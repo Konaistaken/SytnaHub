@@ -2025,7 +2025,7 @@ end
 do -- Example UI
 	local Window = library:AddWindow("Sytna Hub | MM2", {
 		main_color = Color3.fromRGB(41, 74, 122),
-		min_size = Vector2.new(500, 600),
+		min_size = Vector2.new(387, 229),
 		toggle_key = Enum.KeyCode.RightShift,
 		can_resize = true,
 	})
